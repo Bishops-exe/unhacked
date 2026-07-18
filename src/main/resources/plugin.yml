@@ -1,0 +1,33 @@
+name: ${name}
+version: ${version}
+main: me.bishopsexe.unhacked.UnhackedPlugin
+api-version: '1.21'
+description: Detect client-side mods using sign components.
+author: Bishops_exe
+depend:
+  - packetevents
+  - PacketBlocks
+permissions:
+  unhacked.check:
+    description: Use /unhacked check <player> to run a check.
+    default: op
+  unhacked.reload:
+    description: Use /unhacked reload.
+    default: op
+  unhacked.echo-results:
+    description: Receive check result notifications.
+    default: op
+  unhacked.loglevel:
+    description: Use /unhacked loglevel to view or change your own log verbosity.
+    default: op
+  unhacked.use:
+    description: Access to /unhacked (parent permission).
+    default: op
+  unhacked.*:
+    default: false
+    children:
+      unhacked.check: true
+      unhacked.reload: true
+      unhacked.results: true
+      unhacked.loglevel: true
+      unhacked.use: true

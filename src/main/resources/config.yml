@@ -1,0 +1,175 @@
+#   EXECUTE-ON (per mod)
+#   Console command to run for each possible check result.
+#   Supports {player} and {mod} placeholders.
+#   Leave a value blank for no action on that result.
+#   Value can be a single string or a list of strings (runs all commands).
+#     detected:
+#       - "kick {player} ..."
+#       - "broadcast {player} flagged - {mod}"
+#   Use your ban plugin's command, e.g.:
+#     LiteBans:    "litebans ban {player} 7d Cheating - {mod} detected"
+#     AdvancedBan: "tempban {player} 7d Cheating - {mod} detected"
+#     Vanilla:     "ban {player} Cheating - {mod} detected"
+#
+#   execute-on:
+#     detected: ""
+#     not-detected: ""
+#     protected: ""
+#     failed: ""
+#     not-received: ""
+mods:
+  exploit-preventer:
+    display-name: "Exploit preventer"
+    key: "key.forward"
+    mode: EXPLOIT_PREVENTER
+    execute-on:
+      detected: "kick {player} You have been kicked - {mod} detected"
+
+  meteor-client:
+    display-name: "Meteor Client"
+    key: "key.meteor-client.open-gui"
+    mode: TRANSLATE
+    execute-on:
+      detected: "ban {player} Cheating - {mod} detected"
+
+  freecam:
+    display-name: "Freecam"
+    key: "key.freecam.toggle"
+    mode: KEYBIND
+    execute-on:
+      detected: "kick {player} You have been kicked - {mod} detected"
+
+  wurst:
+    display-name: "Wurst Client"
+    key: "key.wurst.zoom"
+    mode: KEYBIND
+    execute-on:
+      detected: "ban {player} Cheating - {mod} detected"
+
+  world-downloader:
+    display-name: "World Downloader"
+    key: "key.wdl.startStop"
+    mode: TRANSLATE
+    execute-on:
+      detected: "ban {player} Unauthorized mod - {mod} detected"
+
+  autoclicker-fabric:
+    display-name: "AutoClicker (Fabric)"
+    key: "autoclicker-fabric.hud.holding"
+    mode: TRANSLATE
+    execute-on:
+      detected: "kick {player} You have been kicked - {mod} detected"
+
+  antiafk:
+    display-name: "AntiAFK"
+    key: "key.antiafk.toggle"
+    mode: TRANSLATE
+    execute-on:
+      detected: "kick {player} You have been kicked - {mod} detected"
+
+  auto-clicker-mc:
+    display-name: "Auto Clicker (p1k0chu)"
+    key: "key.auto-clicker_.toggle"
+    mode: KEYBIND
+    execute-on:
+      detected: "kick {player} You have been kicked - {mod} detected"
+
+  baritone:
+    display-name: "Baritone"
+    key: "key.baritone.pathToggle"
+    mode: TRANSLATE
+    execute-on:
+      detected: "ban {player} Cheating - {mod} detected"
+
+  # ─── Meteor Client Addons ───────────────────────────────────────────────────
+  trouser-streak:
+    display-name: "Trouser Streak"
+    key: "addon.trouser-streak.name"
+    mode: TRANSLATE
+    execute-on:
+      detected: "ban {player} Cheating - {mod} detected"
+
+  trouser-streak-newchunks:
+    display-name: "Trouser Streak (NewerNewChunks)"
+    key: "module.trouser-streak.NewerNewChunks.description"
+    mode: TRANSLATE
+    execute-on:
+      detected: "ban {player} Cheating - {mod} detected"
+
+  trouser-streak-anhero:
+    display-name: "Trouser Streak (AnHero)"
+    key: "module.trouser-streak.AnHero.description"
+    mode: TRANSLATE
+    execute-on:
+      detected: "ban {player} Cheating - {mod} detected"
+
+  glazed:
+    display-name: "Glazed"
+    key: "addon.glazed.name"
+    mode: TRANSLATE
+    execute-on:
+      detected: "ban {player} Cheating - {mod} detected"
+
+  glazed-ahsniper:
+    display-name: "Glazed (AH Sniper)"
+    key: "module.glazed.AhSniper.description"
+    mode: TRANSLATE
+    execute-on:
+      detected: "ban {player} Cheating - {mod} detected"
+
+  glazed-autosell:
+    display-name: "Glazed (Auto Sell)"
+    key: "module.glazed.AutoSell.description"
+    mode: TRANSLATE
+    execute-on:
+      detected: "ban {player} Cheating - {mod} detected"
+
+default-check-mods:
+  - exploit-preventer
+  - meteor-client
+  - freecam
+  - wurst
+  - world-downloader
+  - autoclicker-fabric
+  - antiafk
+  - auto-clicker-mc
+  - baritone
+
+join-check:
+  enabled: true
+  only-first-join: false
+  # How many ticks to wait after a player joins before opening the sign GUI.
+  # Needs to be long enough for the client to finish loading chunks.
+  # 80 ticks = 4 seconds. Increase if players still get false PROTECTED results on join.
+  delay: 20
+  mods:
+    - exploit-preventer
+    - meteor-client
+    - freecam
+    - wurst
+    - baritone
+
+messages:
+  no-permission:     "You don't have permission to do this."
+  player-not-found:  "Player {player} not found."
+  already-checking:  "{player} is already being checked."
+  check-started:     "Starting check on {player}..."
+  reload-done:       "Configuration reloaded successfully."
+  invalid-mod:       "Unknown hack: {mod}"
+  detection-alert:   "{player} was detected using {mod}! Action: {action}"
+  check-batches:     "Check for {player} has {batches} batch(es), {total} mod check(s) total"
+  batch-sending:     "Sending batch {batch}/{total} to {player} at {x},{y},{z}"
+  batches-sent:      "All batches sent for {player}"
+  timeout:           "Timeout for {player} ({received}/{total} batch response(s) received)"
+  batch-received:    "Received batch response {received}/{total} from {player}: {lines}"
+  finish-start:      "Finishing check for {player}, evaluating {total} mod check(s)"
+  mod-result:        "{mod} -> {result}"
+  punishment-issued: "Punishment '{action}' issued to {player} for {mod}"
+  check-finished:    "Check finished for {player}: {detected} detected, {punished} punishment(s) issued"
+  loglevel-current:  "Your log level is {level}. Possible values: {levels}"
+  loglevel-set:      "Your log level was set to {level}."
+  loglevel-invalid:  "Unknown log level: {level}. Possible values: {levels}"
+
+# When a player times out, all checks inside that batch will be set to SKIPPED
+# 10 Seconds
+timeout: 200
