@@ -36,6 +36,7 @@ import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
+import org.geysermc.geyser.api.GeyserApi;
 
 @Getter
 @RequiredArgsConstructor
@@ -95,6 +96,11 @@ public class CheckProcess {
     UUID uuid = target.getUniqueId();
     if (playerCheckMap.containsKey(uuid)) {
       output.severe(MessageUtil.alreadyChecking(target.getName()));
+      return null;
+    }
+
+    if (isBedrockPlayer(plugin, target)) {
+      output.warning(MessageUtil.geyserIgnored(target.getName()));
       return null;
     }
 
@@ -284,6 +290,12 @@ public class CheckProcess {
       case TRANSLATE, EXPLOIT_PREVENTER -> Component.translatable(mod.key());
       case KEYBIND -> Component.keybind(mod.key());
     };
+  }
+
+  private static boolean isBedrockPlayer(@NonNull UnhackedPlugin plugin, @NonNull Player target) {
+    boolean geyserPresent = Arrays.stream(plugin.getServer().getPluginManager().getPlugins())
+        .anyMatch(p -> p.getName().toLowerCase().contains("geyser"));
+    return geyserPresent && GeyserApi.api().isBedrockPlayer(target.getUniqueId());
   }
 
   private static List<ModCheck[]> buildBatches(@NonNull Iterable<ModCheck> mods) {

@@ -19,6 +19,9 @@ repositories {
     maven("https://repo.codemc.io/repository/maven-releases/")
     maven("https://repo.codemc.io/repository/maven-snapshots/")
     maven("https://jitpack.io")
+    maven("https://repo.opencollab.dev/maven-snapshots/")
+    maven("https://repo.opencollab.dev/maven-releases/")
+    maven("https://repo.opencollab.dev/main/")
 }
 
 dependencies {
@@ -28,6 +31,7 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:${property("paperApiVersion")}")
     compileOnly("com.github.retrooper:packetevents-spigot:${property("packetEventsVersion")}")
     compileOnly("com.github.BitByLogics:PacketBlocks:${property("packetBlocksVersion")}")
+    compileOnly("org.geysermc.geyser:api:2.11.2-SNAPSHOT")
 }
 
 tasks {

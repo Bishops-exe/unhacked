@@ -101,4 +101,8 @@ public class MessageUtil {
   public static @NonNull String loglevelInvalid(@NonNull String level, @NonNull String levels) {
     return PlaceholderUtil.parse("loglevel-invalid", Map.of("level", level, "levels", levels));
   }
+
+  public static @NonNull String geyserIgnored(@NonNull String player) {
+    return PlaceholderUtil.parse("geyser-ignored", Map.of("player", player));
+  }
 }

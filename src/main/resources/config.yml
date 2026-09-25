@@ -169,6 +169,7 @@ messages:
   loglevel-current:  "Your log level is {level}. Possible values: {levels}"
   loglevel-set:      "Your log level was set to {level}."
   loglevel-invalid:  "Unknown log level: {level}. Possible values: {levels}"
+  geyser-ignored:    "{player} joined using Geyser. Check did not happen and is ignored!"
 
 # When a player times out, all checks inside that batch will be set to SKIPPED
 # 10 Seconds
