@@ -15,6 +15,7 @@ import me.bishopsexe.unhacked.config.ConfigManager;
 import me.bishopsexe.unhacked.events.JoinEvent;
 import me.bishopsexe.unhacked.events.SignEvent;
 import me.bishopsexe.unhacked.logging.LogLevelManager;
+import me.bishopsexe.unhacked.utils.MetricUtil;
 import me.bishopsexe.unhacked.utils.PunishmentUtil;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -30,6 +31,8 @@ public class UnhackedPlugin extends JavaPlugin {
   private SignEvent signEvent;
   @Getter
   private LogLevelManager logLevelManager;
+  @Getter
+  private MetricUtil metricUtil;
 
   @Override
   public void onLoad() {
@@ -46,6 +49,7 @@ public class UnhackedPlugin extends JavaPlugin {
     logLevelManager = new LogLevelManager(this);
     configManager = new ConfigManager(this);
     punishmentUtil = new PunishmentUtil(this);
+    metricUtil = new MetricUtil(this);
 
     UnhackedCommand checkCmd = new UnhackedCommand(this);
 
@@ -57,6 +61,8 @@ public class UnhackedPlugin extends JavaPlugin {
     getServer().getPluginManager().registerEvents(new JoinEvent(this), this);
 
     getLogger().info("Unhacked has been enabled.");
+
+    metricUtil.enable();
   }
 
   @Override
@@ -67,5 +73,7 @@ public class UnhackedPlugin extends JavaPlugin {
     }
     PacketEvents.getAPI().terminate();
     getLogger().info("Unhacked has been disabled.");
+
+    metricUtil.disable();
   }
 }

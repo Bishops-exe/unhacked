@@ -22,11 +22,13 @@ repositories {
     maven("https://repo.opencollab.dev/maven-snapshots/")
     maven("https://repo.opencollab.dev/maven-releases/")
     maven("https://repo.opencollab.dev/main/")
+    maven("https://repo.faststats.dev/releases")
 }
 
 dependencies {
     compileOnly("org.projectlombok:lombok:${property("lombokVersion")}")
     annotationProcessor("org.projectlombok:lombok:${property("lombokVersion")}")
+    implementation("dev.faststats.metrics:bukkit:0.30.2")
 
     compileOnly("io.papermc.paper:paper-api:${property("paperApiVersion")}")
     compileOnly("com.github.retrooper:packetevents-spigot:${property("packetEventsVersion")}")
